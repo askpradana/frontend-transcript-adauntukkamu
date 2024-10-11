@@ -1,6 +1,18 @@
 <script setup lang="ts">
+import router from '@/router'
+import { usePocketbaseStore } from '@/stores/pocketbase'
+
+const pocketbaseStore = usePocketbaseStore()
+
 function loginWithGoogle() {
-  console.log('loginWithGoogle')
+  pocketbaseStore
+    .doLogin()
+    .then(() => {
+      router.push('/dashboard')
+    })
+    .catch(error => {
+      console.error('Login failed:', error)
+    })
 }
 </script>
 
