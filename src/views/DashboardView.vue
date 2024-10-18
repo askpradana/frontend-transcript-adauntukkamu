@@ -12,5 +12,7 @@ function logout() {
 
 <template>
   <p>Dashboard gengs</p>
+  <p>Loggedin as, {{ store.pb.authStore.model?.email }}</p>
+  <p>Hello, {{ store.pb.authStore.model?.name }}</p>
   <button @click="logout">Logout</button>
 </template>
