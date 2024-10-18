@@ -1,18 +1,14 @@
-<script setup lang="ts">
-import router from '@/router'
-import { usePocketbaseStore } from '@/stores/pocketbase'
-
-const store = usePocketbaseStore()
-
-function logout() {
-  store.doLogout()
-  router.push('/')
-}
+<script setup>
+import LeftBar from '@/components/loggedin/LeftBar.vue'
 </script>
 
 <template>
-  <p>Dashboard gengs</p>
-  <p>Loggedin as, {{ store.pb.authStore.model?.email }}</p>
-  <p>Hello, {{ store.pb.authStore.model?.name }}</p>
-  <button @click="logout">Logout</button>
+  <main class="flex flex-row">
+    <!-- <p>Dashboard gengs</p>
+      <p>Loggedin as, {{ store.pb.authStore.model?.email }}</p>
+      <p>Hello, {{ store.pb.authStore.model?.name }}</p>
+      <button @click="logout">Logout</button> -->
+    <LeftBar />
+    <RouterView />
+  </main>
 </template>
