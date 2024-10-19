@@ -9,6 +9,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "allowJs": true,
+    "checkJs": false
   }
 }

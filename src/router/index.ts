@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import { usePocketbaseStore } from '@/stores/pocketbase'
 import HomeView from '@/views/HomeView.vue'
 import DashboardViewVue from '@/views/DashboardView.vue'
@@ -7,7 +7,7 @@ import SettingsView from '@/views/SettingsView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import NewTranscriptVue from '@/components/loggedin/NewTranscript.vue'
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
@@ -22,7 +22,6 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: DashboardViewVue,
-    // @ts-ignore
     beforeEnter: (to, from, next) => {
       const pocketbaseStore = usePocketbaseStore()
       pocketbaseStore.pb.authStore.isValid ? next() : next('/')
