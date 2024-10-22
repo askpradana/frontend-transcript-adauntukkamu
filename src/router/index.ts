@@ -4,7 +4,7 @@ import HomeView from '@/views/HomeView.vue'
 import DashboardViewVue from '@/views/DashboardView.vue'
 import ContentDashboardVue from '@/components/loggedin/ContentDashboard.vue'
 import SettingsView from '@/views/SettingsView.vue'
-import ProfileView from '@/views/ProfileView.vue'
+import HistoryViewVue from '@/views/HistoryView.vue'
 import NewTranscriptVue from '@/components/loggedin/NewTranscript.vue'
 
 const routes: RouteRecordRaw[] = [
@@ -38,9 +38,9 @@ const routes: RouteRecordRaw[] = [
         component: SettingsView
       },
       {
-        path: '/profile',
-        name: 'dashboard-profile',
-        component: ProfileView
+        path: '/history',
+        name: 'dashboard-history',
+        component: HistoryViewVue
       },
       {
         path: '/new',

@@ -76,7 +76,7 @@ function cancelLogout() {
           <ul class="space-y-1">
             <li>
               <RouterLink
-                to="/profile"
+                to="/history"
                 class="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
               >
                 <svg
@@ -87,17 +87,14 @@ function cancelLogout() {
                   stroke="currentColor"
                   stroke-width="2"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
                 </svg>
 
                 <span
                   class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-primary py-1.5 text-xs font-medium text-black group-hover:visible px-4"
                 >
-                  Profile
+                  History
                 </span>
               </RouterLink>
             </li>
