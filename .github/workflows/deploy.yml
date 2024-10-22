@@ -30,6 +30,8 @@ jobs:
         run: npm run build
         env:
           ROLLUP_SKIP_NODE_RESOLVE: true
+          VITE_POCKETBASE_URL: ${{ secrets.VITE_POCKETBASE_URL }}
+          VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
 
       # Step 5: Deploy the built files to the VPS
       - name: Deploy to VPS
