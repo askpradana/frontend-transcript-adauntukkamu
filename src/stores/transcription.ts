@@ -17,7 +17,7 @@ export const useTranscriptionStore = defineStore('transcription', () => {
         formData.append('file', file);
 
         try {
-            const response = await fetch('http://localhost:3000/transcribe', {
+            const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/transcribe', {
                 method: 'POST',
                 body: formData
             });

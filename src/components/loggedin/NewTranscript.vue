@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useTranscriptionStore } from '@/stores/transcription'
 import { usePocketbaseStore } from '@/stores/pocketbase'
 
@@ -8,6 +8,16 @@ const id = pbStore.currentUser.id
 const transcriptionStore = useTranscriptionStore()
 const fileInput = ref<HTMLInputElement | null>(null)
 const isLoading = ref(false)
+
+const transcriptionText = computed(() => {
+  if (!transcriptionStore.transcription) return ''
+  try {
+    const parsed = JSON.parse(transcriptionStore.transcription)
+    return parsed.result?.fullTranscription || transcriptionStore.transcription
+  } catch {
+    return transcriptionStore.transcription
+  }
+})
 
 const handleSubmit = async () => {
   if (fileInput.value && fileInput.value.files && fileInput.value.files[0]) {
@@ -60,7 +70,7 @@ const handleSubmit = async () => {
         Transcription Result:
       </h2>
       <p class="text-sm text-green-700">
-        {{ transcriptionStore.transcription }}
+        {{ transcriptionText }}
       </p>
     </div>
     <div
