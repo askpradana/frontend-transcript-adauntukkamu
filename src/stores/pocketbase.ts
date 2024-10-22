@@ -4,7 +4,6 @@ import { ref, computed } from 'vue'
 
 export const usePocketbaseStore = defineStore('pocketbase', () => {
     const baseUrl = import.meta.env.VITE_POCKETBASE_URL
-    console.log('PocketBase URL:', baseUrl)
     const pb = new PocketBase(baseUrl)
 
     const currentUser = computed(() => pb.authStore.model)
