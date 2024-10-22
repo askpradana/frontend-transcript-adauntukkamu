@@ -7,6 +7,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       # Step 1: Check out the repository
       - uses: actions/checkout@v4
@@ -16,14 +17,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm' # Enable npm caching
 
-      # Step 3: Install project dependencies
+      # Step 3: Clean install and force platform-specific dependencies
       - name: Install dependencies
-        run: npm ci
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install --platform=linux --arch=x64
 
       # Step 4: Build the project
       - name: Build
         run: npm run build
+        env:
+          ROLLUP_SKIP_NODE_RESOLVE: true
 
       # Step 5: Deploy the built files to the VPS
       - name: Deploy to VPS
@@ -34,8 +40,7 @@ jobs:
           REMOTE_DIR: ${{ secrets.REMOTE_DIR }}
           CUSTOM_PORT: ${{ secrets.CUSTOM_PORT }}
         run: |
-          set -x # Print commands and their arguments as they are executed
-
+          set -x
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod -c 0600 ~/.ssh/id_rsa
