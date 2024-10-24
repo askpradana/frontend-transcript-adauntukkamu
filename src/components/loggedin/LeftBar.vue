@@ -23,7 +23,9 @@ function cancelLogout() {
 </script>
 
 <template>
-  <nav class="flex h-screen w-16 flex-col justify-between border-e bg-white">
+  <nav
+    class="flex h-screen w-16 flex-col justify-between border-e bg-white fixed"
+  >
     <div>
       <div class="inline-flex size-16 items-center justify-center">
         <RouterLink to="/dashboard">

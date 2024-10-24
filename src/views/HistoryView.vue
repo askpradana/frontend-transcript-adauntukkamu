@@ -1,80 +1,63 @@
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { useHistoryStore } from '@/stores/historyStore'
+import { usePocketbaseStore } from '@/stores/pocketbase'
+import HistoryCard from '@/components/cards/HistoryCard.vue'
+import SearchInput from '@/components/inputs/SearchInput.vue'
+
+// const router = useRouter()
+const route = useRoute()
+const historyStore = useHistoryStore()
+
+onMounted(async () => {
+  const userId = usePocketbaseStore().currentUser.id
+  await historyStore.fetchHistory(userId)
+
+  const searchParam = route.query.title
+  if (searchParam && typeof searchParam === 'string') {
+    historyStore.setSearchQuery(searchParam)
+  }
+})
+
+// const handleItemClick = (id: number) => {
+//   router.push(`/history/${id}`)
+// }
+</script>
+
 <template>
-  <div class="overflow-x-auto">
-    <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-      <thead class="ltr:text-left">
-        <tr>
-          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-            Name
-          </th>
-          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-            Date of Birth
-          </th>
-          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-            Role
-          </th>
-          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-            Salary
-          </th>
-          <th class="px-4 py-2"></th>
-        </tr>
-      </thead>
+  <div class="ml-16 min-h-screen">
+    <div class="max-w-2xl mx-auto">
+      <SearchInput v-model="historyStore.searchQuery" />
+      <div
+        v-if="historyStore.isLoading"
+        class="text-center flex justify-center items-center min-h-[80vh]"
+      >
+        <div
+          class="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-900 mx-auto"
+        ></div>
+      </div>
 
-      <tbody class="divide-y divide-gray-200">
-        <tr>
-          <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-            John Doe
-          </td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700">24/05/1995</td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-            Web Developer
-          </td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700">$120,000</td>
-          <td class="whitespace-nowrap px-4 py-2">
-            <a
-              href="#"
-              class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-            >
-              View
-            </a>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-            Jane Doe
-          </td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700">04/11/1980</td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-            Web Designer
-          </td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700">$100,000</td>
-          <td class="whitespace-nowrap px-4 py-2">
-            <a
-              href="#"
-              class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-            >
-              View
-            </a>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-            Gary Barlow
-          </td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700">24/05/1995</td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700">Singer</td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700">$20,000</td>
-          <td class="whitespace-nowrap px-4 py-2">
-            <a
-              href="#"
-              class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-            >
-              View
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <div
+        v-else-if="historyStore.error"
+        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"
+      >
+        {{ historyStore.error }}
+      </div>
+      <span v-else>
+        <p class="my-6 text-sm">
+          You have {{ historyStore.historyItems.length }} previous transcribe
+        </p>
+        <div class="list-container">
+          <div class="my-4 grid gap-2">
+            <HistoryCard
+              v-for="item in historyStore.filteredHistoryItems"
+              :key="item.id"
+              :items="item"
+            />
+          </div>
+        </div>
+      </span>
+    </div>
   </div>
 </template>
