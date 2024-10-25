@@ -33,7 +33,7 @@ const checkTokenLeftWithDelay = async () => {
 </script>
 
 <template>
-  <main class="p-6">
+  <main class="p-6 ml-14">
     <h1 class="text-3xl font-bold mb-6">
       Hello 👋 {{ pbStore.currentUser.name }}
     </h1>

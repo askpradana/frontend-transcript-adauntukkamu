@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { usePocketbaseStore } from '@/stores/pocketbase'
@@ -23,7 +23,9 @@ function cancelLogout() {
 </script>
 
 <template>
-  <nav class="flex h-screen w-16 flex-col justify-between border-e bg-white">
+  <nav
+    class="flex h-screen w-16 flex-col justify-between border-e bg-white fixed"
+  >
     <div>
       <div class="inline-flex size-16 items-center justify-center">
         <RouterLink to="/dashboard">
