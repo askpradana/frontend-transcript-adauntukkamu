@@ -6,7 +6,6 @@ import { usePocketbaseStore } from '@/stores/pocketbase'
 import HistoryCard from '@/components/cards/HistoryCard.vue'
 import SearchInput from '@/components/inputs/SearchInput.vue'
 
-// const router = useRouter()
 const route = useRoute()
 const historyStore = useHistoryStore()
 
@@ -19,10 +18,6 @@ onMounted(async () => {
     historyStore.setSearchQuery(searchParam)
   }
 })
-
-// const handleItemClick = (id: number) => {
-//   router.push(`/history/${id}`)
-// }
 </script>
 
 <template>
