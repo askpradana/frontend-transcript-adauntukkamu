@@ -44,11 +44,18 @@ const handleSubmit = async () => {
         <button
           type="submit"
           :disabled="isLoading"
-          class="w-full p-3 border border-transparent rounded-md shadow-sm text-sm font-semibold text-white transition duration-300 ease-in-out bg-secondary hover:bg-secondary_darker focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:opacity-50 disabled:cursor-not-allowed"
+          class="w-full p-3 border border-black rounded-md shadow-sm text-sm font-semibold text-dark transition duration-300 ease-in-out bg-white hover:bg-secondary_darker hover:text-white hover:border-dark/15 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {{ isLoading ? 'Transcribing...' : 'Transcribe Audio' }}
         </button>
       </form>
+
+      <div
+        v-if="transcriptionStore.error"
+        class="mt-6 p-4 bg-red-50 rounded-lg border border-warning"
+      >
+        <p class="text-sm text-red-700">{{ transcriptionStore.error }}</p>
+      </div>
 
       <div
         v-if="transcriptionStore.transcription"
@@ -60,12 +67,6 @@ const handleSubmit = async () => {
         <p class="text-sm text-green-700">
           {{ transcriptionStore.transcription }}
         </p>
-      </div>
-      <div
-        v-if="transcriptionStore.error"
-        class="mt-6 p-4 bg-red-50 rounded-lg border border-warning"
-      >
-        <p class="text-sm text-red-700">{{ transcriptionStore.error }}</p>
       </div>
     </div>
   </div>

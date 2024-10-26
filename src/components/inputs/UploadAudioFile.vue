@@ -96,7 +96,7 @@ const removeFile = () => {
         'font-bold text-2xl text-white transition duration-500 ease-in-out',
       ]"
     >
-      DROP HERE
+      📤 DROP HERE
     </p>
     <p v-if="!modelValue" :class="[isDragging ? 'hidden' : '', 'py-2']">or</p>
     <button
@@ -127,8 +127,9 @@ const removeFile = () => {
         </p>
         <button
           type="button"
+          title="Remove file"
           @click="removeFile"
-          class="ml-2 rounded-md bg-white border border-dark p-2 mt-2 transition duration-300 hover:bg-primary"
+          class="ml-2 rounded-md bg-white border border-dark p-2 mt-2 transition duration-300 hover:bg-primary/60"
         >
           ❌
         </button>
