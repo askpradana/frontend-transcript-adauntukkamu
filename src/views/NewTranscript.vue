@@ -31,8 +31,8 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="ml-16 p-6">
-    <div class="mx-2 md:max-w-screen-md md:mx-auto">
+  <div class="ml-16">
+    <div class="mx-2 md:max-w-2xl md:mx-auto">
       <h1
         class="text-xl text-center font-bold mb-8 text-gray-800 mt-8 md:text-3xl"
       >

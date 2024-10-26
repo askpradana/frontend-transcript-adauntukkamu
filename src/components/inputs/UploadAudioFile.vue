@@ -113,7 +113,7 @@ const removeFile = () => {
     <div v-if="modelValue" class="mt-4">
       <h3
         :class="[
-          'text-lg font-semibold text-center',
+          'text-lg text-dark font-semibold text-center',
           isDragging ? 'hidden' : '',
         ]"
       >

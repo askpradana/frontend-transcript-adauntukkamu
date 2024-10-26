@@ -22,7 +22,7 @@ onMounted(async () => {
 
 <template>
   <div class="ml-16 min-h-screen">
-    <div class="max-w-2xl mx-auto">
+    <div class="mx-2 md:max-w-2xl md:mx-auto">
       <SearchInput v-model="historyStore.searchQuery" />
       <div
         v-if="historyStore.isLoading"
