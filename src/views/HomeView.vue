@@ -30,7 +30,7 @@ function loginWithGoogle() {
     :login-with-google="loginWithGoogle"
   />
   <Benefit :login-with-google="loginWithGoogle" />
-  <Pricing />
+  <Pricing :discount-percent="45" :base-price="20000" />
   <FAQ />
   <Footer />
 </template>
