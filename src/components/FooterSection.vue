@@ -12,7 +12,7 @@
           class="inline-flex items-center gap-2 rounded-full border border-primary hover:border-secondary bg-primary px-8 py-3 text-indigo-600 hover:bg-secondary hover:text-white focus:outline-none focus:ring active:bg-white/90 duration-200 ease-in-out"
           href="#"
         >
-          <span class="text-sm font-medium"> Let's Get Started </span>
+          <span class="text-sm font-medium"> Let'ss Get Started </span>
 
           <svg
             class="size-5"
