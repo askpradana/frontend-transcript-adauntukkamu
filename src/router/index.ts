@@ -5,7 +5,7 @@ import DashboardViewVue from '@/views/DashboardView.vue'
 import ContentDashboardVue from '@/components/loggedin/ContentDashboard.vue'
 import SettingsView from '@/views/SettingsView.vue'
 import HistoryViewVue from '@/views/HistoryView.vue'
-import NewTranscriptVue from '@/components/loggedin/NewTranscript.vue'
+import NewTranscriptVue from '@/views/NewTranscript.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -24,31 +24,35 @@ const routes: RouteRecordRaw[] = [
     component: DashboardViewVue,
     beforeEnter: (to, from, next) => {
       const pocketbaseStore = usePocketbaseStore()
-      pocketbaseStore.pb.authStore.isValid ? next() : next('/')
+      if (pocketbaseStore.pb.authStore.isValid) {
+        next()
+      } else {
+        next('/')
+      }
     },
     children: [
       {
         path: '',
         name: 'dashboard-content',
-        component: ContentDashboardVue
+        component: ContentDashboardVue,
       },
       {
         path: '/settings',
         name: 'dashboard-settings',
-        component: SettingsView
+        component: SettingsView,
       },
       {
         path: '/history',
         name: 'dashboard-history',
-        component: HistoryViewVue
+        component: HistoryViewVue,
       },
       {
         path: '/new',
         name: 'dashboard-new-transcript',
-        component: NewTranscriptVue
-      }
-    ]
-  }
+        component: NewTranscriptVue,
+      },
+    ],
+  },
 ]
 
 const router = createRouter({
