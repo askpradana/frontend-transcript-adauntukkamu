@@ -11,6 +11,8 @@ onMounted(() => {
   // Check if the user is already authenticated
   if (pocketbaseStore.pb.authStore.isValid) {
     // User is authenticated, redirect to dashboard
+    console.log('pocket-base:', pocketbaseStore.currentUser)
+
     router.push('/dashboard')
   }
 })
