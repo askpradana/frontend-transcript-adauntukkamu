@@ -5,6 +5,21 @@ import Benefit from '../components/BenefitSection.vue'
 import Pricing from '../components/PricingSection.vue'
 import FAQ from '../components/FaqSection.vue'
 import Footer from '../components/FooterSection.vue'
+import router from '@/router'
+import { usePocketbaseStore } from '@/stores/pocketbase'
+
+const pocketbaseStore = usePocketbaseStore()
+
+function loginWithGoogle() {
+  pocketbaseStore
+    .doLogin()
+    .then(() => {
+      router.push('/dashboard')
+    })
+    .catch(error => {
+      console.error('Login failed:', error)
+    })
+}
 </script>
 
 <template>
