@@ -13,15 +13,15 @@ export const useTranscriptionStore = defineStore('transcription', () => {
       return
     }
 
-    const formData = new FormData()
-    formData.append('recordID', userID)
-    formData.append('file', file)
+    const formData = new FormData();
+    formData.append('recordID', userID);
+    formData.append('file', file);
 
     try {
-      const response = await fetch(`${baseUrl}/transcribe`, {
+      const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/transcribe', {
         method: 'POST',
-        body: formData,
-      })
+        body: formData
+      });
 
       let result
       try {
