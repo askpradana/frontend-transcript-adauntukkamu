@@ -41,7 +41,8 @@ onMounted(async () => {
       </div>
       <span v-else>
         <p class="my-6 text-sm">
-          You have {{ historyStore.historyItems.length }} previous transcribe
+          You have {{ historyStore.historyItems.length }} previous
+          transcriptions
         </p>
         <div class="list-container">
           <div class="my-4 grid gap-2">
