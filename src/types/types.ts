@@ -18,3 +18,14 @@ export interface HistoryItemInterface {
   updated: string
   words: Word[]
 }
+
+export interface Result {
+  fullTranscription: string
+  duration: number
+  language: string
+  words: Word[]
+}
+
+export interface ResultTranscribeInterface {
+  result: Result
+}

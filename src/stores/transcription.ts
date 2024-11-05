@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useTranscriptionStore = defineStore('transcription', () => {
-  const baseUrl = import.meta.env.VITE_BACKEND_URL
+  // const baseUrl = import.meta.env.VITE_BACKEND_URL
   const transcription = ref('')
   const error = ref('')
   const isTokenRunout = ref(false)
@@ -13,15 +13,18 @@ export const useTranscriptionStore = defineStore('transcription', () => {
       return
     }
 
-    const formData = new FormData();
-    formData.append('recordID', userID);
-    formData.append('file', file);
+    const formData = new FormData()
+    formData.append('recordID', userID)
+    formData.append('file', file)
 
     try {
-      const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/transcribe', {
-        method: 'POST',
-        body: formData
-      });
+      const response = await fetch(
+        import.meta.env.VITE_BACKEND_URL + '/transcribe',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      )
 
       let result
       try {
