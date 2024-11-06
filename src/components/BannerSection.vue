@@ -30,7 +30,7 @@ defineProps({
             class="block w-full rounded bg-primary px-12 py-3 text-sm font-medium text-white shadow hover:bg-primarydarker duration-200 sm:w-auto"
             @click="$props.loginWithGoogle"
           >
-            Get Started
+            Mulai Sekarang
           </button>
         </div>
       </div>
