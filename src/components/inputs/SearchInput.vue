@@ -43,7 +43,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <span class="relative flex items-center">
+  <span class="relative flex items-center mt-8">
     <span class="absolute ml-4">🔎</span>
     <input
       type="text"

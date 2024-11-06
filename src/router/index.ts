@@ -6,6 +6,7 @@ import ContentDashboardVue from '@/components/loggedin/ContentDashboard.vue'
 import SettingsView from '@/views/SettingsView.vue'
 import HistoryViewVue from '@/views/HistoryView.vue'
 import NewTranscriptVue from '@/views/NewTranscript.vue'
+import TranscriptDetails from '@/views/TranscriptDetails.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -45,6 +46,11 @@ const routes: RouteRecordRaw[] = [
         path: '/history',
         name: 'dashboard-history',
         component: HistoryViewVue,
+      },
+      {
+        path: '/transcript/:id',
+        name: 'dashboard-transcribe',
+        component: TranscriptDetails,
       },
       {
         path: '/new',

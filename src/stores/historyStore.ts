@@ -49,7 +49,7 @@ export const useHistoryStore = defineStore('history', () => {
     searchQuery.value = query
   }
 
-  const getHistoryItemById = (id: number): HistoryItemInterface | undefined => {
+  const getHistoryItemById = (id: string): HistoryItemInterface | undefined => {
     return historyItems.value.find(item => item.id === id.toString())
   }
 
