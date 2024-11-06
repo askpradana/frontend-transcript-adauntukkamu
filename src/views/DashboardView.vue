@@ -19,7 +19,7 @@ onMounted(() => {
   <main v-if="pocketbaseStore.pb.authStore.isValid" class="flex flex-row">
     <LeftBar />
     <div class="flex flex-col w-screen">
-      <header class="bg-white">
+      <header class="bg-realwhite">
         <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div class="flex h-16 items-center justify-between">
             <div

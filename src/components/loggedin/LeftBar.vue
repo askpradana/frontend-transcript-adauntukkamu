@@ -23,21 +23,19 @@ function cancelLogout() {
 </script>
 
 <template>
-  <nav
-    class="flex h-screen w-16 flex-col justify-between border-e bg-white fixed"
-  >
+  <nav class="flex h-screen w-16 flex-col justify-between bg-realwhite fixed">
     <div>
       <div class="inline-flex size-16 items-center justify-center">
         <RouterLink to="/dashboard">
           <span
-            class="grid size-10 place-content-center rounded-lg bg-primary text-xs text-gray-600"
+            class="grid size-10 place-content-center rounded-lg text-xs text-gray-600"
           >
-            🔥
+            <img src="/notula.png" width="40" />
           </span>
         </RouterLink>
       </div>
 
-      <div class="border-t border-black flex gap-4 flex-col items-center">
+      <div class="flex gap-4 flex-col items-center">
         <div class="px-2 pt-4">
           <RouterLink
             to="/settings"
@@ -68,7 +66,7 @@ function cancelLogout() {
               </svg>
 
               <span
-                class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-primary py-1.5 text-xs font-medium text-black group-hover:visible px-4"
+                class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-white py-1.5 text-xs font-medium text-black group-hover:visible px-4"
               >
                 General
               </span>
@@ -94,7 +92,7 @@ function cancelLogout() {
                 </svg>
 
                 <span
-                  class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-primary py-1.5 text-xs font-medium text-black group-hover:visible px-4"
+                  class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-white py-1.5 text-xs font-medium text-black group-hover:visible px-4"
                 >
                   History
                 </span>
@@ -123,7 +121,7 @@ function cancelLogout() {
                   </svg>
 
                   <span
-                    class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-primary py-1.5 text-xs font-medium text-black group-hover:visible px-4"
+                    class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-white py-1.5 text-xs font-medium text-black group-hover:visible px-4"
                   >
                     New
                   </span>
@@ -135,9 +133,7 @@ function cancelLogout() {
       </div>
     </div>
 
-    <div
-      class="sticky inset-x-0 bottom-0 border-t border-gray-100 bg-primary p-2"
-    >
+    <div class="sticky inset-x-0 bottom-0 b bg-white p-2">
       <button
         @click="initiateLogout"
         class="group relative flex w-full justify-center rounded-lg px-2 py-1.5 text-sm text-dark"
@@ -158,7 +154,7 @@ function cancelLogout() {
         </svg>
 
         <span
-          class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-primary py-1.5 text-xs font-medium text-black group-hover:visible px-4"
+          class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-white py-1.5 text-xs font-medium text-black group-hover:visible px-4"
         >
           Logout
         </span>
