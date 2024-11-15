@@ -23,149 +23,105 @@ function cancelLogout() {
 </script>
 
 <template>
-  <nav class="flex h-screen w-16 flex-col justify-between bg-realwhite fixed">
-    <div>
-      <div class="inline-flex size-16 items-center justify-center">
-        <RouterLink to="/dashboard">
-          <span
-            class="grid size-10 place-content-center rounded-lg text-xs text-gray-600"
-          >
-            <img src="/notula.png" width="40" />
-          </span>
-        </RouterLink>
-      </div>
+  <div
+    class="flex h-screen flex-col justify-between border-e bg-white select-none"
+  >
+    <div class="px-4 py-6">
+      <span class="grid h-10 w-32 place-content-center rounded-lg bg-gray-100">
+        <img src="/notula.png" width="40" alt="Logo" />
+      </span>
 
-      <div class="flex gap-4 flex-col items-center">
-        <div class="px-2 pt-4">
+      <ul class="mt-6 space-y-1">
+        <li>
           <RouterLink
-            to="/settings"
-            class="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+            to="/dashboard"
+            class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+            :class="{ 'bg-gray-100': $route.path === '/dashboard' }"
           >
-            <button
-              href="#"
-              class="t group relative flex justify-center rounded bg-blue-50 px-2 py-1.5 text-blue-700"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="size-5 opacity-75"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                />
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-
-              <span
-                class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-white py-1.5 text-xs font-medium text-black group-hover:visible px-4"
-              >
-                General
-              </span>
-            </button>
+            Dashboard
           </RouterLink>
+        </li>
 
-          <ul class="space-y-1">
-            <li>
-              <RouterLink
-                to="/history"
-                class="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+        <li>
+          <details class="group [&_summary::-webkit-details-marker]:hidden">
+            <summary
+              class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 hover:bg-gray-100"
+            >
+              <span class="text-sm font-medium">Transcriptions</span>
+              <span
+                class="shrink-0 transition duration-300 group-open:-rotate-180"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="size-5 opacity-75"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
+                  class="size-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
                 >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
                 </svg>
+              </span>
+            </summary>
 
-                <span
-                  class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-white py-1.5 text-xs font-medium text-black group-hover:visible px-4"
+            <ul class="mt-2 space-y-1 px-4">
+              <li>
+                <RouterLink
+                  to="/new"
+                  class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100"
+                  :class="{ 'bg-gray-100': $route.path === '/new' }"
+                >
+                  New Transcript
+                </RouterLink>
+              </li>
+
+              <li>
+                <RouterLink
+                  to="/history"
+                  class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100"
+                  :class="{ 'bg-gray-100': $route.path === '/history' }"
                 >
                   History
-                </span>
-              </RouterLink>
-            </li>
+                </RouterLink>
+              </li>
+            </ul>
+          </details>
+        </li>
 
-            <li>
-              <RouterLink to="/new">
-                <a
-                  href="#"
-                  class="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                  </svg>
+        <li>
+          <RouterLink
+            to="/settings"
+            class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+            :class="{ 'bg-gray-100': $route.path === '/settings' }"
+          >
+            Settings
+          </RouterLink>
+        </li>
 
-                  <span
-                    class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-white py-1.5 text-xs font-medium text-black group-hover:visible px-4"
-                  >
-                    New
-                  </span>
-                </a>
-              </RouterLink>
-            </li>
-          </ul>
-        </div>
+        <li>
+          <button
+            @click="initiateLogout"
+            class="w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 text-left hover:bg-warning hover:text-white"
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sticky inset-x-0 bottom-0 border-t border-gray-100">
+      <div class="flex items-center gap-2 bg-white p-4 hover:bg-gray-50">
+        <p class="text-xs truncate flex-1">{{ store.currentUser.email }}</p>
       </div>
     </div>
-
-    <div class="sticky inset-x-0 bottom-0 b bg-white p-2">
-      <button
-        @click="initiateLogout"
-        class="group relative flex w-full justify-center rounded-lg px-2 py-1.5 text-sm text-dark"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="size-5 opacity-75"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-          />
-        </svg>
-
-        <span
-          class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-white py-1.5 text-xs font-medium text-black group-hover:visible px-4"
-        >
-          Logout
-        </span>
-      </button>
-    </div>
-  </nav>
+  </div>
 
   <!-- Logout Confirmation Modal -->
   <div
     v-if="showLogoutModal"
-    class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center"
+    class="fixed inset-0 bg-gray-600/50 flex items-center justify-center z-50"
   >
     <div class="bg-white p-5 rounded-lg shadow-lg border border-black">
       <h2 class="text-xl font-bold mb-4">Confirm Logout</h2>
@@ -173,7 +129,7 @@ function cancelLogout() {
       <div class="flex justify-end">
         <button
           @click="cancelLogout"
-          class="mr-2 px-4 py-2 bg-gray-200 text-gray-800 rounded hover:border-black border border-white"
+          class="mr-2 px-4 py-2 bg-gray-200 text-gray-800 rounded border border-white hover:border-black"
         >
           Cancel
         </button>
