@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue'
 import { useTokenStore } from '@/stores/token'
 import { usePocketbaseStore } from '@/stores/pocketbase'
 import { onBeforeUnmount } from 'vue'
+import RecentlyTranscriptTable from '../tables/RecentlyTranscriptTable.vue'
 
 const tokenStore = useTokenStore()
 const pbStore = usePocketbaseStore()
@@ -90,17 +91,7 @@ const checkTokenLeftWithDelay = async () => {
 
     <div class="mt-8">
       <h2 class="text-2xl font-semibold mb-4">Recent Transcripts</h2>
-      <ul class="bg-white rounded-lg shadow">
-        <li class="border-b p-4 hover:bg-gray-50">
-          Transcript 1 - Created on 2023-05-01
-        </li>
-        <li class="border-b p-4 hover:bg-gray-50">
-          Transcript 2 - Created on 2023-04-28
-        </li>
-        <li class="p-4 hover:bg-gray-50">
-          Transcript 3 - Created on 2023-04-25
-        </li>
-      </ul>
+      <RecentlyTranscriptTable />
     </div>
   </main>
 </template>

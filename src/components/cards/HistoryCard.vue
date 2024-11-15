@@ -22,6 +22,8 @@ const toDetailsTrancriptionPage = (id: string) => {
     <p class="text-base line-clamp-1">
       {{ items.text }}
     </p>
-    <p class="text-sm mt-2">{{ formatDate(items.updated) }}</p>
+    <p class="text-xs mt-2 font-semibold text-dark">
+      {{ formatDate(items.updated) }}
+    </p>
   </article>
 </template>
