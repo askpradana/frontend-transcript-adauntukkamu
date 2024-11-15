@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import { usePocketbaseStore } from './stores/pocketbase'
+import { usePocketbaseStore } from '@/stores/pocketbase'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import AnalyticsNotice from '@/components/AnalyticsNotice.vue'
 
 const pocketbaseStore = usePocketbaseStore()
 const router = useRouter()
@@ -17,4 +18,5 @@ onMounted(() => {
 
 <template>
   <RouterView />
+  <AnalyticsNotice />
 </template>
