@@ -24,7 +24,7 @@ function cancelLogout() {
 
 <template>
   <div
-    class="flex h-screen flex-col justify-between border-e bg-white select-none"
+    class="fixed flex h-screen flex-col justify-between border-e bg-white select-none"
   >
     <div class="px-4 py-6">
       <span class="grid h-10 w-32 place-content-center rounded-lg bg-gray-100">
