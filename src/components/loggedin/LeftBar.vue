@@ -4,6 +4,13 @@ import { RouterLink } from 'vue-router'
 import { usePocketbaseStore } from '@/stores/pocketbase'
 import router from '@/router'
 
+defineProps({
+  isShow: {
+    type: Boolean,
+    default: false,
+  },
+})
+
 const store = usePocketbaseStore()
 const showLogoutModal = ref(false)
 
@@ -24,10 +31,13 @@ function cancelLogout() {
 
 <template>
   <div
-    class="flex h-screen flex-col justify-between border-e bg-white select-none"
+    :class="isShow ? 'translate-x-0' : '-translate-x-full'"
+    class="-translate-x-full transition-all duration-700 fixed flex h-screen flex-col justify-between border-e bg-white select-none md:translate-x-0"
   >
     <div class="px-4 py-6">
-      <span class="grid h-10 w-32 place-content-center rounded-lg bg-gray-100">
+      <span
+        class="grid h-10 w-32 -mt-3 place-content-end rounded-lg bg-gray-100 md:mt-0 md:place-content-center"
+      >
         <img src="/notula.png" width="40" alt="Logo" />
       </span>
 
