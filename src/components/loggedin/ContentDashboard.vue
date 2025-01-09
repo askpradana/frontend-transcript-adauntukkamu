@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useTokenStore } from '@/stores/token'
-import { usePocketbaseStore } from '@/stores/pocketbase'
+import { useTokenStore } from '../../stores/token'
+import { usePocketbaseStore } from '../../stores/pocketbase'
 import { onBeforeUnmount } from 'vue'
 import RecentlyTranscriptTable from '../tables/RecentlyTranscriptTable.vue'
 
@@ -30,6 +30,42 @@ const checkTokenLeftWithDelay = async () => {
   setTimeout(() => {
     isLoading.value = false
   }, remainingTime)
+}
+
+const showTopUp = ref(false)
+const showConfirmation = ref(false)
+const topUpAmount = ref('')
+const confirmationAmount = ref(0)
+
+const handleExternalNavigation = (amount: number) => {
+  // In production, this would go to your actual payment gateway
+  const paymentUrl = `https://google.com?amount=${amount}`
+  window.open(paymentUrl, '_blank')
+}
+
+const handleTopUp = (amount: number) => {
+  confirmationAmount.value = amount
+  showConfirmation.value = true
+}
+
+const confirmTopUp = () => {
+  const amount = confirmationAmount.value
+  console.log(`Processing payment for ${amount} tokens`)
+  handleExternalNavigation(amount)
+  showConfirmation.value = false
+}
+
+const handleCustomTopUp = () => {
+  showTopUp.value = true
+  topUpAmount.value = ''
+}
+
+const processCustomTopUp = () => {
+  const amount = parseInt(topUpAmount.value)
+  if (amount && amount > 0) {
+    handleTopUp(amount)
+    showTopUp.value = false
+  }
 }
 </script>
 
@@ -71,19 +107,50 @@ const checkTokenLeftWithDelay = async () => {
           </button>
         </div>
       </div>
-
       <div class="bg-white p-6 rounded-lg shadow">
-        <h2 class="text-xl font-semibold mb-4">User status</h2>
-        <div class="flex space-x-4">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-semibold">Top up Tokens</h2>
+        </div>
+        <div class="space-y-6">
+          <div class="grid grid-cols-3 gap-4">
+            <button
+              v-for="amount in [1, 10, 20]"
+              :key="amount"
+              @click="handleTopUp(amount)"
+              class="relative bg-white border-2 border-blue-600 text-blue-600 px-4 py-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 group"
+            >
+              <span class="block text-lg font-semibold">{{ amount }}</span>
+              <span class="block text-sm text-gray-600">Tokens</span>
+              <div
+                class="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-5 rounded-lg transition-opacity duration-200"
+              ></div>
+            </button>
+          </div>
+          <div class="relative">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-gray-200"></div>
+            </div>
+            <div class="relative flex justify-center">
+              <span class="bg-white px-4 text-sm text-gray-500">or</span>
+            </div>
+          </div>
           <button
-            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            @click="handleCustomTopUp"
+            class="w-full bg-white border-2 border-dashed border-gray-300 text-gray-600 px-4 py-3 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors duration-200 flex items-center justify-center space-x-2"
           >
-            New Transcript
-          </button>
-          <button
-            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-          >
-            View All
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>Custom Amount</span>
           </button>
         </div>
       </div>
@@ -92,6 +159,127 @@ const checkTokenLeftWithDelay = async () => {
     <div class="mt-8">
       <h2 class="text-2xl font-semibold mb-4">Recent Transcripts</h2>
       <RecentlyTranscriptTable />
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div
+      v-if="showConfirmation"
+      class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50"
+    >
+      <div
+        class="relative top-20 mx-auto p-6 border w-[28rem] shadow-xl rounded-lg bg-white"
+      >
+        <div class="mt-2">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-semibold text-gray-900">Confirm Top Up</h3>
+            <button
+              @click="showConfirmation = false"
+              class="text-gray-400 hover:text-gray-500 focus:outline-none"
+            >
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <p class="text-gray-600 mb-4">
+            Are you sure you want to top up {{ confirmationAmount }} tokens?
+          </p>
+          <div class="flex justify-end space-x-3 mt-6">
+            <button
+              @click="showConfirmation = false"
+              class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              Cancel
+            </button>
+            <button
+              @click="confirmTopUp"
+              class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Amount Modal -->
+    <div
+      v-if="showTopUp"
+      class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50"
+    >
+      <div
+        class="relative top-20 mx-auto p-6 border w-[28rem] shadow-xl rounded-lg bg-white"
+      >
+        <div class="mt-2">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-semibold text-gray-900">
+              Custom Token Amount
+            </h3>
+            <button
+              @click="showTopUp = false"
+              class="text-gray-400 hover:text-gray-500 focus:outline-none"
+            >
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <label
+                for="topup-amount"
+                class="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Number of Tokens
+              </label>
+              <div class="relative rounded-md shadow-sm">
+                <input
+                  id="topup-amount"
+                  type="number"
+                  v-model="topUpAmount"
+                  class="block w-full rounded-md border-0 py-2.5 pl-3 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  placeholder="Enter amount"
+                  min="1"
+                />
+              </div>
+            </div>
+            <div class="flex justify-end space-x-3 mt-6">
+              <button
+                @click="showTopUp = false"
+                class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              >
+                Cancel
+              </button>
+              <button
+                @click="processCustomTopUp"
+                class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              >
+                Proceed
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </template>
