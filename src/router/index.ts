@@ -1,12 +1,15 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
-import { usePocketbaseStore } from '@/stores/pocketbase'
-import HomeView from '@/views/HomeView.vue'
-import DashboardViewVue from '@/views/DashboardView.vue'
-import ContentDashboardVue from '@/components/loggedin/ContentDashboard.vue'
-import SettingsView from '@/views/SettingsView.vue'
-import HistoryViewVue from '@/views/HistoryView.vue'
-import NewTranscriptVue from '@/views/NewTranscript.vue'
-import TranscriptDetails from '@/views/TranscriptDetails.vue'
+import { usePocketbaseStore } from '../stores/pocketbase'
+import HomeView from '../views/HomeView.vue'
+import DashboardViewVue from '../views/DashboardView.vue'
+import ContentDashboardVue from '../components/loggedin/ContentDashboard.vue'
+import SettingsView from '../views/SettingsView.vue'
+import HistoryViewVue from '../views/HistoryView.vue'
+import NewTranscriptVue from '../views/NewTranscript.vue'
+import TranscriptDetails from '../views/TranscriptDetails.vue'
+import TermsView from '../views/TermsView.vue'
+import ContactView from '../views/ContactView.vue'
+import PublicContactView from '../views/PublicContactView.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -15,9 +18,19 @@ const routes: RouteRecordRaw[] = [
     component: HomeView,
   },
   {
+    path: '/terms',
+    name: 'terms',
+    component: TermsView,
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: PublicContactView,
+  },
+  {
     path: '/about',
     name: 'about',
-    component: () => import('@/views/AboutView.vue'),
+    component: () => import('../views/AboutView.vue'),
   },
   {
     path: '/dashboard',
@@ -41,6 +54,16 @@ const routes: RouteRecordRaw[] = [
         path: '/settings',
         name: 'dashboard-settings',
         component: SettingsView,
+      },
+      {
+        path: '/terms-policy',
+        name: 'dashboard-terms',
+        component: TermsView,
+      },
+      {
+        path: '/contact',
+        name: 'dashboard-contact',
+        component: ContactView,
       },
       {
         path: '/history',

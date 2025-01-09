@@ -84,7 +84,7 @@
       </summary>
 
       <p class="mt-4 leading-relaxed text-black">
-        Untuk sekarang kami mendukung hasil plain text.
+        Untuk sekarang kami mendukung hasil plain text dan output PDF.
       </p>
     </details>
 
@@ -149,7 +149,7 @@
       </p>
     </details>
 
-    <details
+    <!-- <details
       class="group border-s-4 border-primary bg-gray-50 p-6 [&_summary::-webkit-details-marker]:hidden"
     >
       <summary class="flex cursor-pointer items-center justify-between gap-1.5">
@@ -177,6 +177,6 @@
         Untuk sekarang kami sedang mencari harga yang cocok untuk transkripsi,
         sementara waktu nikmati diskon up to 50% yang kami berikan!
       </p>
-    </details>
+    </details> -->
   </div>
 </template>
