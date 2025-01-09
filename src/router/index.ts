@@ -7,6 +7,8 @@ import SettingsView from '@/views/SettingsView.vue'
 import HistoryViewVue from '@/views/HistoryView.vue'
 import NewTranscriptVue from '@/views/NewTranscript.vue'
 import TranscriptDetails from '@/views/TranscriptDetails.vue'
+import TermsView from '@/views/TermsView.vue'
+import ContactView from '@/views/ContactView.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -41,6 +43,16 @@ const routes: RouteRecordRaw[] = [
         path: '/settings',
         name: 'dashboard-settings',
         component: SettingsView,
+      },
+      {
+        path: '/terms-policy',
+        name: 'dashboard-terms',
+        component: TermsView,
+      },
+      {
+        path: '/contact',
+        name: 'dashboard-contact',
+        component: ContactView,
       },
       {
         path: '/history',
