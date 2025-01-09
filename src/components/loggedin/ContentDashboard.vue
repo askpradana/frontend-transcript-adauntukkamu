@@ -10,6 +10,7 @@ const tokenStore = useTokenStore()
 const pbStore = usePocketbaseStore()
 const userID = pbStore.currentUser.id
 const isLoading = ref(false)
+const isProcessing = ref(false)
 
 onMounted(() => {
   checkTokenLeftWithDelay()
@@ -44,6 +45,9 @@ const handleTopUp = (amount: number) => {
 }
 
 const confirmTopUp = async () => {
+  if (isProcessing.value) return
+
+  isProcessing.value = true
   try {
     const amount = confirmationAmount.value
     const response = await makePostRequest({
@@ -67,6 +71,7 @@ const confirmTopUp = async () => {
   } catch (error) {
     console.error('Error during top up:', error)
   } finally {
+    isProcessing.value = false
     showConfirmation.value = false
   }
 }
@@ -192,6 +197,7 @@ const processCustomTopUp = () => {
             <h3 class="text-xl font-semibold text-gray-900">Confirm Top Up</h3>
             <button
               @click="showConfirmation = false"
+              :disabled="isProcessing"
               class="text-gray-400 hover:text-gray-500 focus:outline-none"
             >
               <svg
@@ -221,9 +227,35 @@ const processCustomTopUp = () => {
             </button>
             <button
               @click="confirmTopUp"
-              class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              :disabled="isProcessing"
+              class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed relative"
             >
-              Confirm
+              <span :class="{ 'opacity-0': isProcessing }">Confirm</span>
+              <div
+                v-if="isProcessing"
+                class="absolute inset-0 flex items-center justify-center"
+              >
+                <svg
+                  class="animate-spin h-5 w-5 text-gray-700"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"
+                  ></circle>
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              </div>
             </button>
           </div>
         </div>
@@ -290,9 +322,35 @@ const processCustomTopUp = () => {
               </button>
               <button
                 @click="processCustomTopUp"
-                class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                :disabled="isProcessing"
+                class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed relative"
               >
-                Proceed
+                <span :class="{ 'opacity-0': isProcessing }">Proceed</span>
+                <div
+                  v-if="isProcessing"
+                  class="absolute inset-0 flex items-center justify-center"
+                >
+                  <svg
+                    class="animate-spin h-5 w-5 text-gray-700"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"
+                    ></circle>
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                </div>
               </button>
             </div>
           </div>
