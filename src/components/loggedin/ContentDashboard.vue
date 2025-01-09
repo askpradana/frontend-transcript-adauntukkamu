@@ -47,6 +47,13 @@ const handleTopUp = (amount: number) => {
 const confirmTopUp = async () => {
   if (isProcessing.value) return
 
+  // Show maintenance notification
+  alert(
+    'Payment system is currently under maintenance. Please try again later.',
+  )
+  showConfirmation.value = false
+
+  /* Original payment implementation - archived for future reference
   isProcessing.value = true
   try {
     const amount = confirmationAmount.value
@@ -74,6 +81,7 @@ const confirmTopUp = async () => {
     isProcessing.value = false
     showConfirmation.value = false
   }
+  */
 }
 
 const handleCustomTopUp = () => {
