@@ -4,6 +4,7 @@ import { useTokenStore } from '../../stores/token'
 import { usePocketbaseStore } from '../../stores/pocketbase'
 import { onBeforeUnmount } from 'vue'
 import RecentlyTranscriptTable from '../tables/RecentlyTranscriptTable.vue'
+import { makePostRequest } from '../../utils/utils'
 
 const tokenStore = useTokenStore()
 const pbStore = usePocketbaseStore()
@@ -37,22 +38,37 @@ const showConfirmation = ref(false)
 const topUpAmount = ref('')
 const confirmationAmount = ref(0)
 
-const handleExternalNavigation = (amount: number) => {
-  // In production, this would go to your actual payment gateway
-  const paymentUrl = `https://google.com?amount=${amount}`
-  window.open(paymentUrl, '_blank')
-}
-
 const handleTopUp = (amount: number) => {
   confirmationAmount.value = amount
   showConfirmation.value = true
 }
 
-const confirmTopUp = () => {
-  const amount = confirmationAmount.value
-  console.log(`Processing payment for ${amount} tokens`)
-  handleExternalNavigation(amount)
-  showConfirmation.value = false
+const confirmTopUp = async () => {
+  try {
+    const amount = confirmationAmount.value
+    const response = await makePostRequest({
+      recordID: userID,
+      customerName: pbStore.currentUser.name,
+      customerEmail: pbStore.currentUser.email,
+      itemQuantity: amount,
+    })
+
+    console.log('Full response:', response)
+
+    // The response itself contains urlPayment, not in a data property
+    console.log('Response:', response)
+    const paymentUrl = response.data?.urlPayment || response.urlPayment
+    if (paymentUrl) {
+      console.log('Redirecting to:', paymentUrl)
+      window.location.href = paymentUrl
+    } else {
+      console.error('No payment URL received:', response)
+    }
+  } catch (error) {
+    console.error('Error during top up:', error)
+  } finally {
+    showConfirmation.value = false
+  }
 }
 
 const handleCustomTopUp = () => {
@@ -65,6 +81,8 @@ const processCustomTopUp = () => {
   if (amount && amount > 0) {
     handleTopUp(amount)
     showTopUp.value = false
+  } else {
+    console.error('Invalid amount')
   }
 }
 </script>

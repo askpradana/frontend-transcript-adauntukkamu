@@ -45,3 +45,48 @@ export function debounce<T extends (...args: string[]) => void>(
     timeoutId = setTimeout(() => fn(...args), delay)
   }
 }
+
+// Types for the POST request
+interface RequestBody {
+  recordID: string
+  customerName: string
+  customerEmail: string
+  itemQuantity: number
+}
+
+interface ApiResponse {
+  success?: boolean
+  message?: string
+  data?: any
+  urlPayment?: string
+}
+
+/**
+ * Makes a POST request to the backend API
+ * @param body - The request body containing record details
+ * @returns Promise<ApiResponse> - The API response
+ * @throws Error if the request fails
+ */
+export async function makePostRequest(body: RequestBody): Promise<ApiResponse> {
+  try {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/token-add`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body)
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data: ApiResponse = await response.json()
+    return data
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to make request: ${error.message}`)
+    }
+    throw new Error('An unknown error occurred')
+  }
+}
