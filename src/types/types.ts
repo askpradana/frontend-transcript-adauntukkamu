@@ -33,6 +33,32 @@ export interface InfoTokenCardProps {
   refreshTokenFunc: () => void
 }
 
+interface TransactionData {
+  transaction_id: string
+  status: string
+  quantity: number
+  created_at: string
+  paid_at: string
+  transaction_link?: string
+}
+
+interface TransactionDetailData extends TransactionData {
+  currency: string
+  paid_amount: number
+  customer_name: string
+  email: string
+}
+
+export interface TransactionListInterface {
+  success: boolean
+  transactions: TransactionData[]
+}
+
+export interface TransactionDetailInterface {
+  success: boolean
+  transactions: TransactionDetailData
+}
+
 export interface ResultTranscribeInterface {
   result: Result
 }

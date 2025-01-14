@@ -35,14 +35,14 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../views/AboutView.vue'),
   },
   {
-    path: '/success',
-    name: 'dashboard-transaction-success',
-    component: SuccessTransaction,
-  },
-  {
     path: '/failed',
     name: 'dashboard-transaction-failed',
     component: ErrorTransaction,
+  },
+  {
+    path: '/success/:transaction_id',
+    name: 'dashboard-transaction-success',
+    component: SuccessTransaction,
   },
   {
     path: '/dashboard',

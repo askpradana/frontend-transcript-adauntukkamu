@@ -1,3 +1,8 @@
+import type {
+  TransactionListInterface,
+  TransactionDetailInterface,
+} from '@/types/types'
+
 // date format
 export const formatDate = (dateString: string): string => {
   const createdDate = new Date(dateString)
@@ -31,6 +36,17 @@ export const formatDate = (dateString: string): string => {
   }
 
   return result
+}
+
+// long format date
+export const formatDateLong = (dateString: string): string => {
+  const date = new Date(dateString) // Mengonversi string menjadi objek Date
+  const options: Intl.DateTimeFormatOptions = {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  }
+  return date.toLocaleDateString('en-US', options)
 }
 
 // debounce for seacrh history
@@ -69,19 +85,68 @@ interface ApiResponse {
  */
 export async function makePostRequest(body: RequestBody): Promise<ApiResponse> {
   try {
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/token-add`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/token-add`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
       },
-      body: JSON.stringify(body)
-    })
+    )
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
 
     const data: ApiResponse = await response.json()
+    return data
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to make request: ${error.message}`)
+    }
+    throw new Error('An unknown error occurred')
+  }
+}
+
+// Get List Trasaction user
+export async function getTransactionList(
+  userId: string,
+): Promise<TransactionListInterface> {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/transactions-list/${userId}`,
+    )
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data: TransactionListInterface = await response.json()
+    return data
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to make request: ${error.message}`)
+    }
+    throw new Error('An unknown error occurred')
+  }
+}
+
+// Get Detail Trasaction data
+export async function getDetailTransaction(
+  transaction_id: string,
+): Promise<TransactionDetailInterface> {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/transactions-view/${transaction_id}`,
+    )
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data: TransactionDetailInterface = await response.json()
     return data
   } catch (error) {
     if (error instanceof Error) {
