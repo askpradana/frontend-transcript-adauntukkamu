@@ -10,6 +10,8 @@ import TranscriptDetails from '../views/TranscriptDetails.vue'
 import TermsView from '../views/TermsView.vue'
 import ContactView from '../views/ContactView.vue'
 import PublicContactView from '../views/PublicContactView.vue'
+import SuccessTransaction from '../views/SuccessTransaction.vue'
+import ErrorTransaction from '../views/ErrorTransaction.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -31,6 +33,16 @@ const routes: RouteRecordRaw[] = [
     path: '/about',
     name: 'about',
     component: () => import('../views/AboutView.vue'),
+  },
+  {
+    path: '/success',
+    name: 'dashboard-transaction-success',
+    component: SuccessTransaction,
+  },
+  {
+    path: '/failed',
+    name: 'dashboard-transaction-failed',
+    component: ErrorTransaction,
   },
   {
     path: '/dashboard',

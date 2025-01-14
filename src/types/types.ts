@@ -26,6 +26,13 @@ export interface Result {
   words: Word[]
 }
 
+export interface InfoTokenCardProps {
+  name: string
+  tokenLeft: number
+  isLoading: boolean
+  refreshTokenFunc: () => void
+}
+
 export interface ResultTranscribeInterface {
   result: Result
 }
