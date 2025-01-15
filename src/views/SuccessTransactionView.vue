@@ -34,34 +34,47 @@ const moveToDashboard = () => {
 <template>
   <div class="min-h-screen bg-primary/40 flex justify-center items-center">
     <div
+      v-if="isLoading"
+      class="text-center flex justify-center items-center my-4"
+    >
+      <div
+        class="animate-spin rounded-full h-20 w-20 border-b-2 border-gray-900 mx-auto"
+      ></div>
+    </div>
+
+    <!-- Box Component -->
+    <div
+      v-else
       class="flex flex-col justify-center items-center bg-white p-8 rounded-md border border-black shadow-md max-w-xl mx-4 md:p-16"
     >
       <img
+        v-if="transactionData?.status === 'PAID'"
         class="w-28 md:w-32 mb-4 bg-primary/25 p-4 rounded-full"
         src="../assets/success.webp"
         alt="success-icon"
       />
+      <img
+        v-else
+        class="w-20 md:w-32 mb-4 bg-primary/25 p-6 rounded-full"
+        src="../assets/warning.webp"
+        alt="warning-icon"
+      />
       <h1 class="text-center font-bold text-xl md:text-lg">
-        Payment Successful
+        {{
+          transactionData?.status === 'PAID'
+            ? 'Payment Successful'
+            : 'Payment Pending'
+        }}
       </h1>
       <p class="text-center mt-2 text-sm text-border/95">
-        Congratulations, the payment has been successful. Your token has been
-        added.
+        {{
+          transactionData?.status === 'PAID'
+            ? 'Congratulations, the payment has been successful. Your token has been added.'
+            : 'Congratulations, top up process has been created. Waiting for the payment process'
+        }}
       </p>
 
-      <div
-        v-if="isLoading"
-        class="text-center flex justify-center items-center my-4"
-      >
-        <div
-          class="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900 mx-auto"
-        ></div>
-      </div>
-
-      <div
-        class="w-full md:w-[80%] text-sm md:text-base text-border/95 mt-4"
-        v-else
-      >
+      <div class="w-full md:w-[80%] text-sm md:text-base text-border/95 mt-4">
         <span class="flex justify-between">
           <p>Name :</p>
           <p>{{ transactionData?.customer_name }}</p>
