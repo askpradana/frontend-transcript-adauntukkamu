@@ -48,14 +48,7 @@ const handleTopUp = (amount: number) => {
 const confirmTopUp = async () => {
   if (isProcessing.value) return
 
-  // Show maintenance notification
-  // alert(
-  //   'Payment system is currently under maintenance. Please try again later.',
-  // )
   showConfirmation.value = false
-
-  // total token amount to top up
-  console.log(confirmationAmount.value)
 
   //Original payment implementation - archived for future reference
   isProcessing.value = true
@@ -68,13 +61,11 @@ const confirmTopUp = async () => {
       itemQuantity: amount,
     })
 
-    console.log('Full response:', response)
-
     // The response itself contains urlPayment, not in a data property
-    // console.log('Response:', response)
-    const paymentUrl = response.data?.urlPayment || response.urlPayment
+
+    const paymentUrl = response.data?.redirect_url || response.redirect_url
+
     if (paymentUrl) {
-      console.log('Redirecting to:', paymentUrl)
       window.location.href = paymentUrl
     } else {
       console.error('No payment URL received:', response)

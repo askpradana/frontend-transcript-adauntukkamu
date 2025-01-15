@@ -84,7 +84,7 @@ interface ApiResponse {
   success?: boolean
   message?: string
   data?: any
-  urlPayment?: string
+  redirect_url?: string
 }
 
 /**
