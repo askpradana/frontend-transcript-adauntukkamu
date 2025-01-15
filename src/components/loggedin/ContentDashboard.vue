@@ -112,7 +112,7 @@ const processCustomTopUp = () => {
         :is-loading="isLoading"
         :refresh-token-func="checkTokenLeftWithDelay"
       />
-      <div class="bg-white p-6 rounded-lg shadow">
+      <div class="bg-white p-6 rounded-lg shadow border border-black">
         <div class="flex justify-between items-center mb-6">
           <h2 class="text-xl font-semibold">Top up Tokens</h2>
         </div>
