@@ -5,6 +5,7 @@ import { usePocketbaseStore } from '../../stores/pocketbase'
 import { onBeforeUnmount } from 'vue'
 import RecentlyTranscriptTable from '../tables/RecentlyTranscriptTable.vue'
 import { makePostRequest } from '../../utils/utils'
+import TokenInfo from '../cards/TokenInfo.vue'
 
 const tokenStore = useTokenStore()
 const pbStore = usePocketbaseStore()
@@ -48,12 +49,15 @@ const confirmTopUp = async () => {
   if (isProcessing.value) return
 
   // Show maintenance notification
-  alert(
-    'Payment system is currently under maintenance. Please try again later.',
-  )
+  // alert(
+  //   'Payment system is currently under maintenance. Please try again later.',
+  // )
   showConfirmation.value = false
 
-  /* Original payment implementation - archived for future reference
+  // total token amount to top up
+  console.log(confirmationAmount.value)
+
+  //Original payment implementation - archived for future reference
   isProcessing.value = true
   try {
     const amount = confirmationAmount.value
@@ -67,7 +71,7 @@ const confirmTopUp = async () => {
     console.log('Full response:', response)
 
     // The response itself contains urlPayment, not in a data property
-    console.log('Response:', response)
+    // console.log('Response:', response)
     const paymentUrl = response.data?.urlPayment || response.urlPayment
     if (paymentUrl) {
       console.log('Redirecting to:', paymentUrl)
@@ -81,7 +85,6 @@ const confirmTopUp = async () => {
     isProcessing.value = false
     showConfirmation.value = false
   }
-  */
 }
 
 const handleCustomTopUp = () => {
@@ -101,43 +104,14 @@ const processCustomTopUp = () => {
 </script>
 
 <template>
-  <main class="p-6 max-w-screen-xl md:ml-48 lg:ml-52">
-    <h1 class="text-3xl font-bold mb-6">
-      Hello 👋 {{ pbStore.currentUser.name }}
-    </h1>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-white p-6 rounded-lg shadow">
-        <h2 class="text-xl font-semibold mb-4">Token</h2>
-        <div class="flex flex-row gap-4 items-center">
-          <p v-if="tokenStore.tokenLeft">
-            Token left : {{ tokenStore.tokenLeft.token_left }}
-          </p>
-          <p v-else>Loading...</p>
-          <button
-            @click="checkTokenLeftWithDelay"
-            :disabled="isLoading"
-            class="focus:outline-none"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#000000"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              :class="{ 'animate-spin': isLoading }"
-            >
-              <path
-                d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+  <main class="p-6 max-w-screen-xl -mt-4 md:ml-48 lg:ml-52 lg:mt-0">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <TokenInfo
+        :name="pbStore?.currentUser?.name"
+        :token-left="tokenStore?.tokenLeft?.token_left"
+        :is-loading="isLoading"
+        :refresh-token-func="checkTokenLeftWithDelay"
+      />
       <div class="bg-white p-6 rounded-lg shadow">
         <div class="flex justify-between items-center mb-6">
           <h2 class="text-xl font-semibold">Top up Tokens</h2>

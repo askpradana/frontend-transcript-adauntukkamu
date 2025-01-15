@@ -32,7 +32,7 @@ function cancelLogout() {
 <template>
   <div
     :class="isShow ? 'translate-x-0' : '-translate-x-full'"
-    class="-translate-x-full transition-all duration-700 fixed flex h-screen flex-col justify-between border-e bg-white select-none md:translate-x-0"
+    class="z-50 -translate-x-full transition-all duration-700 fixed flex h-screen flex-col justify-between border-e bg-white select-none md:translate-x-0"
   >
     <div class="px-4 py-6">
       <span

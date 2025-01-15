@@ -24,7 +24,7 @@ onMounted(() => {
   <main v-if="pocketbaseStore.pb.authStore.isValid" class="flex flex-row">
     <LeftBar :isShow="isShow" />
     <div class="flex flex-col w-screen">
-      <header class="bg-realwhite">
+      <header class="bg-realwhite md:-mt-10">
         <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div class="flex h-16 items-center justify-between">
             <button
@@ -48,11 +48,11 @@ onMounted(() => {
               </svg>
             </button>
             <div />
-            <div class="md:flex md:items-center md:gap-12">
+            <!-- <div class="md:flex md:items-center md:gap-12">
               <div class="flex items-center gap-4 cursor-default">
                 <p>{{ pocketbaseStore.currentUser.name }}</p>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </header>
