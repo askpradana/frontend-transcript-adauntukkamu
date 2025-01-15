@@ -47,7 +47,7 @@ const toDetailsTrancriptionPage = (id: string) => {
   >
     {{ historyStore.error }}
   </div>
-  <ul class="bg-white rounded-lg shadow">
+  <ul class="bg-white rounded-lg shadow border border-black">
     <li
       v-if="historyStore.historyItems.length <= 0"
       class="border-b p-4 cursor-pointer transition duration-300 hover:bg-primary/10"
