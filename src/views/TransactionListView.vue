@@ -21,10 +21,8 @@ onMounted(async () => {
   }
 })
 
-const moveToDetailTransaction = (transaction_id: string, status: string) => {
-  if (status === 'PAID') {
-    router.push(`/success/${transaction_id}`)
-  }
+const moveToDetailTransaction = (transaction_id: string) => {
+  router.push(`/success/${transaction_id}`)
 }
 </script>
 
@@ -51,13 +49,7 @@ const moveToDetailTransaction = (transaction_id: string, status: string) => {
               class="p-3 rounded-md border border-primarykindadark cursor-pointer transition duration-300 hover:bg-primary/10"
               v-for="transaction in dataTransactionList"
               :key="transaction.id"
-              @click="
-                moveToDetailTransaction(
-                  transaction.transaction_id,
-                  'PAID',
-                  // transaction.status,
-                )
-              "
+              @click="moveToDetailTransaction(transaction.transaction_id)"
             >
               <ListTransactionCard
                 :date="transaction.created_at"
