@@ -5,13 +5,14 @@ import DashboardViewVue from '../views/DashboardView.vue'
 import ContentDashboardVue from '../components/loggedin/ContentDashboard.vue'
 import SettingsView from '../views/SettingsView.vue'
 import HistoryViewVue from '../views/HistoryView.vue'
-import NewTranscriptVue from '../views/NewTranscript.vue'
-import TranscriptDetails from '../views/TranscriptDetails.vue'
+import NewTranscriptVue from '../views/NewTranscriptView.vue'
+import TranscriptDetails from '../views/TranscriptDetailsView.vue'
 import TermsView from '../views/TermsView.vue'
 import ContactView from '../views/ContactView.vue'
 import PublicContactView from '../views/PublicContactView.vue'
-import SuccessTransaction from '../views/SuccessTransaction.vue'
-import ErrorTransaction from '../views/ErrorTransaction.vue'
+import SuccessTransaction from '../views/SuccessTransactionView.vue'
+import ErrorTransaction from '../views/ErrorTransactionView.vue'
+import TransactionList from '@/views/TransactionListView.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -91,6 +92,11 @@ const routes: RouteRecordRaw[] = [
         path: '/new',
         name: 'dashboard-new-transcript',
         component: NewTranscriptVue,
+      },
+      {
+        path: '/transactions',
+        name: 'dashboard-transactin-list',
+        component: TransactionList,
       },
     ],
   },

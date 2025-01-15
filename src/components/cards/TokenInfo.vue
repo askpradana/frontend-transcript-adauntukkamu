@@ -2,7 +2,8 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePocketbaseStore } from '@/stores/pocketbase'
-import { getTransactionList, formatDateLong } from '@/utils/utils'
+import { getTransactionList } from '@/utils/utils'
+import ListTransactionCard from './ListTransactionCard.vue'
 
 defineProps<{
   name: string
@@ -35,7 +36,7 @@ const moveToDetailTransaction = (transaction_id: string, status: string) => {
 }
 
 const move = () => {
-  router.push('/failed')
+  router.push('/transactions')
 }
 </script>
 
@@ -89,25 +90,11 @@ const move = () => {
             )
           "
         >
-          <span class="flex items-center justify-between">
-            <p class="text-sm font-medium">
-              Top up : {{ transaction.quantity }} Token
-            </p>
-          </span>
-          <span class="flex justify-between items-center">
-            <p class="mt-2 text-xs text-primarydarker">
-              {{ formatDateLong(transaction?.created_at) }}
-            </p>
-            <p
-              class="font-semibold text-sm text-primarydarker"
-              :class="{
-                'text-primarydarker': transaction.status === 'PAID',
-                'text-warning': transaction.status === 'UNPAID',
-              }"
-            >
-              {{ transaction.status }}
-            </p>
-          </span>
+          <ListTransactionCard
+            :date="transaction.created_at"
+            :status="transaction.status"
+            :quantity="transaction.quantity"
+          />
         </div>
       </div>
 

@@ -56,7 +56,7 @@ export interface TransactionListInterface {
 
 export interface TransactionDetailInterface {
   success: boolean
-  transactions: TransactionDetailData
+  transaction: TransactionDetailData
 }
 
 export interface ResultTranscribeInterface {

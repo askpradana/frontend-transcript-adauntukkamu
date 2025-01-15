@@ -49,6 +49,16 @@ export const formatDateLong = (dateString: string): string => {
   return date.toLocaleDateString('en-US', options)
 }
 
+// format Rupiah
+export const formatRupiah = (amount: number): string => {
+  const formatter = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+  })
+
+  return formatter.format(amount)
+}
+
 // debounce for seacrh history
 export function debounce<T extends (...args: string[]) => void>(
   fn: T,
