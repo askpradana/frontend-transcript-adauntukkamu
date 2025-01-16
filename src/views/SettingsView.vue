@@ -54,10 +54,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="max-w-4xl mx-auto px-4 py-8">
+  <div class="max-w-4xl mx-auto px-4 py-4 sm:py-8">
     <div
       v-if="showNotification"
-      class="fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg shadow-lg transition-opacity duration-300"
+      class="fixed top-4 left-4 right-4 sm:left-auto sm:right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg shadow-lg transition-opacity duration-300"
       role="alert"
     >
       <div class="flex items-center">
@@ -72,21 +72,26 @@ onMounted(() => {
       </div>
     </div>
 
-    <h1 class="text-3xl font-bold mb-8 text-gray-900">Settings</h1>
+    <h1 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-900">
+      Settings
+    </h1>
 
-    <div class="space-y-8">
+    <div class="space-y-6">
       <!-- Company Information Section -->
       <section class="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div class="p-6">
-          <h2 class="text-xl font-semibold text-gray-900 mb-6">
+        <div class="p-4 sm:p-6">
+          <h2
+            class="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6"
+          >
             Company Information
           </h2>
-          <p class="text-gray-600 mb-6">
+          <p class="text-sm sm:text-base text-gray-600 mb-6">
             These details will be used in your PDF exports.
           </p>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="col-span-2">
+          <div class="space-y-4 sm:space-y-6">
+            <!-- Logo Upload - Full width on mobile -->
+            <div class="w-full">
               <label class="block text-sm font-medium text-gray-700 mb-2">
                 Company Logo
               </label>
@@ -100,145 +105,128 @@ onMounted(() => {
                 v-if="companyInfo.logo"
                 :src="companyInfo.logo"
                 alt="Company Logo"
-                class="mt-2 h-20 object-contain"
+                class="mt-2 h-16 sm:h-20 object-contain"
               />
             </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">
-                Company Name
-              </label>
-              <input
-                v-model="companyInfo.name"
-                type="text"
-                class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                placeholder="Enter company name"
-              />
-            </div>
+            <!-- Form Fields - Stack on mobile -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Company Name
+                </label>
+                <input
+                  v-model="companyInfo.name"
+                  type="text"
+                  class="w-full p-3 sm:p-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  placeholder="Enter company name"
+                />
+              </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">
-                Address
-              </label>
-              <input
-                v-model="companyInfo.address"
-                type="text"
-                class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                placeholder="Enter company address"
-              />
-            </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Address
+                </label>
+                <input
+                  v-model="companyInfo.address"
+                  type="text"
+                  class="w-full p-3 sm:p-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  placeholder="Enter company address"
+                />
+              </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">
-                Phone
-              </label>
-              <input
-                v-model="companyInfo.phone"
-                type="text"
-                class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                placeholder="Enter phone number"
-              />
-            </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Phone
+                </label>
+                <input
+                  v-model="companyInfo.phone"
+                  type="text"
+                  class="w-full p-3 sm:p-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  placeholder="Enter phone number"
+                />
+              </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">
-                Email
-              </label>
-              <input
-                v-model="companyInfo.email"
-                type="email"
-                class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                placeholder="Enter email address"
-              />
-            </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Email
+                </label>
+                <input
+                  v-model="companyInfo.email"
+                  type="email"
+                  class="w-full p-3 sm:p-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  placeholder="Enter email address"
+                />
+              </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">
-                Website
-              </label>
-              <input
-                v-model="companyInfo.website"
-                type="text"
-                class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                placeholder="Enter website URL"
-              />
-            </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Website
+                </label>
+                <input
+                  v-model="companyInfo.website"
+                  type="text"
+                  class="w-full p-3 sm:p-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  placeholder="Enter website URL"
+                />
+              </div>
 
-            <div class="col-span-2">
-              <button
-                @click="saveCompanyInfo"
-                class="bg-primary hover:bg-primarydarker text-white font-bold py-2 px-4 rounded-lg transition-colors"
-              >
-                Save Company Information
-              </button>
+              <!-- Save Button - Full width on mobile -->
+              <div class="sm:col-span-2">
+                <button
+                  @click="saveCompanyInfo"
+                  class="w-full sm:w-auto bg-primary hover:bg-primarydarker text-white font-bold py-3 sm:py-2 px-4 rounded-lg transition-colors"
+                >
+                  Save Company Information
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </section>
-      <!-- Settings sections -->
-      <section class="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div class="p-6">
-          <h2 class="text-xl font-semibold text-gray-900 mb-6">
-            Account Settings
-          </h2>
-          <p class="text-gray-600 mb-4">
-            Manage your account preferences and settings.
-          </p>
-          <!-- Account settings content will go here -->
-        </div>
-      </section>
 
-      <!-- <section class="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div class="p-6">
-          <h2 class="text-xl font-semibold text-gray-900 mb-6">
-            Notifications
-          </h2>
-          <p class="text-gray-600 mb-4">
-            Configure how you receive notifications.
-          </p>
-          Notification settings content will go here
-        </div>
-      </section> -->
-
+      <!-- Legal Section - Mobile optimized cards -->
       <section class="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div class="p-6">
-          <h2 class="text-xl font-semibold text-gray-900 mb-6">Legal</h2>
-          <div class="space-y-4">
+        <div class="p-4 sm:p-6">
+          <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-6">
+            Legal
+          </h2>
+          <div class="space-y-3">
             <router-link
               to="/terms-policy"
-              class="group flex items-center justify-between p-4 rounded-lg border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-all duration-200"
+              class="group flex items-center justify-between p-3 sm:p-4 rounded-lg border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-all duration-200"
             >
-              <div class="flex items-center space-x-4">
+              <div class="flex items-center space-x-3 sm:space-x-4">
                 <div
                   class="p-2 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 text-blue-600"
+                    class="h-4 w-4 sm:h-5 sm:w-5 text-blue-600"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
                     <path
                       fill-rule="evenodd"
-                      d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                      d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
                       clip-rule="evenodd"
                     />
                   </svg>
                 </div>
                 <div>
                   <h3
-                    class="text-lg font-medium text-gray-900 group-hover:text-blue-600"
+                    class="text-base sm:text-lg font-medium text-gray-900 group-hover:text-blue-600"
                   >
                     Terms and Conditions
                   </h3>
-                  <p class="text-sm text-gray-500">
+                  <p class="text-xs sm:text-sm text-gray-500">
                     Review our terms of service
                   </p>
                 </div>
               </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-gray-400 group-hover:text-blue-600 transition-colors"
+                class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-blue-600"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -252,15 +240,15 @@ onMounted(() => {
 
             <router-link
               to="/contact"
-              class="group flex items-center justify-between p-4 rounded-lg border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-all duration-200"
+              class="group flex items-center justify-between p-3 sm:p-4 rounded-lg border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-all duration-200"
             >
-              <div class="flex items-center space-x-4">
+              <div class="flex items-center space-x-3 sm:space-x-4">
                 <div
                   class="p-2 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 text-blue-600"
+                    class="h-4 w-4 sm:h-5 sm:w-5 text-blue-600"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -274,18 +262,18 @@ onMounted(() => {
                 </div>
                 <div>
                   <h3
-                    class="text-lg font-medium text-gray-900 group-hover:text-blue-600"
+                    class="text-base sm:text-lg font-medium text-gray-900 group-hover:text-blue-600"
                   >
                     Contact Us
                   </h3>
-                  <p class="text-sm text-gray-500">
+                  <p class="text-xs sm:text-sm text-gray-500">
                     Get in touch with our team
                   </p>
                 </div>
               </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-gray-400 group-hover:text-blue-600 transition-colors"
+                class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-blue-600"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >

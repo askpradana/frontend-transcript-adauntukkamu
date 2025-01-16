@@ -95,7 +95,7 @@ const processCustomTopUp = () => {
 </script>
 
 <template>
-  <main class="p-6 max-w-screen-xl -mt-4 md:ml-48 lg:ml-52 lg:mt-0">
+  <main class="p-6 max-w-screen-xl -mt-4 md:ml-48 lg:ml-60 lg:mt-0">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <TokenInfo
         :name="pbStore?.currentUser?.name"

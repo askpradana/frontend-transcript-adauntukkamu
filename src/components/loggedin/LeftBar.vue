@@ -45,9 +45,29 @@ function cancelLogout() {
         <li>
           <RouterLink
             to="/dashboard"
-            class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
-            :class="{ 'bg-gray-100': $route.path === '/dashboard' }"
+            class="group flex items-center gap-3 rounded-lg px-4 py-3 text-black transition-all duration-200 hover:shadow-md"
+            :class="{
+              'bg-primarydarker text-realwhite': $route.path === '/dashboard',
+              'hover:shadow-sm': $route.path !== '/dashboard',
+            }"
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-house"
+            >
+              <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+              <path
+                d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+              />
+            </svg>
             Dashboard
           </RouterLink>
         </li>
@@ -55,9 +75,25 @@ function cancelLogout() {
         <li>
           <details class="group [&_summary::-webkit-details-marker]:hidden">
             <summary
-              class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 hover:bg-gray-100"
+              class="group flex items-center gap-3 rounded-lg px-4 py-3 text-black transition-all duration-200 hover:shadow-md"
             >
-              <span class="text-sm font-medium">Transcriptions</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-folder"
+              >
+                <path
+                  d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"
+                />
+              </svg>
+              Transcriptions
               <span
                 class="shrink-0 transition duration-300 group-open:-rotate-180"
               >
@@ -80,9 +116,35 @@ function cancelLogout() {
               <li>
                 <RouterLink
                   to="/new"
-                  class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100"
-                  :class="{ 'bg-gray-100': $route.path === '/new' }"
+                  class="group flex items-center gap-3 rounded-lg px-4 py-3 text-black transition-all duration-200 hover:shadow-md"
+                  :class="{
+                    'bg-primarydarker text-realwhite': $route.path === '/new',
+                    'hover:shadow-sm': $route.path !== '/new',
+                  }"
                 >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-notebook-pen"
+                  >
+                    <path
+                      d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"
+                    />
+                    <path d="M2 6h4" />
+                    <path d="M2 10h4" />
+                    <path d="M2 14h4" />
+                    <path d="M2 18h4" />
+                    <path
+                      d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"
+                    />
+                  </svg>
                   New Transcript
                 </RouterLink>
               </li>
@@ -90,9 +152,30 @@ function cancelLogout() {
               <li>
                 <RouterLink
                   to="/history"
-                  class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100"
-                  :class="{ 'bg-gray-100': $route.path === '/history' }"
+                  class="group flex items-center gap-3 rounded-lg px-4 py-3 text-black transition-all duration-200 hover:shadow-md"
+                  :class="{
+                    'bg-primarydarker text-realwhite':
+                      $route.path === '/history',
+                    'hover:shadow-sm': $route.path !== '/history',
+                  }"
                 >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-file-clock"
+                  >
+                    <path d="M16 22h2a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3" />
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                    <circle cx="8" cy="16" r="6" />
+                    <path d="M9.5 17.5 8 16.25V14" />
+                  </svg>
                   History
                 </RouterLink>
               </li>
@@ -103,9 +186,29 @@ function cancelLogout() {
         <li>
           <RouterLink
             to="/settings"
-            class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
-            :class="{ 'bg-gray-100': $route.path === '/settings' }"
+            class="group flex items-center gap-3 rounded-lg px-4 py-3 text-black transition-all duration-200 hover:shadow-md"
+            :class="{
+              'bg-primarydarker text-realwhite': $route.path === '/settings',
+              'hover:shadow-sm': $route.path !== '/settings',
+            }"
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-settings"
+            >
+              <path
+                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+              />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
             Settings
           </RouterLink>
         </li>
@@ -113,8 +216,24 @@ function cancelLogout() {
         <li>
           <button
             @click="initiateLogout"
-            class="w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 text-left hover:bg-warning hover:text-white"
+            class="w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 text-left hover:bg-warning hover:text-white flex flex-row gap-3"
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-log-out"
+            >
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" x2="9" y1="12" y2="12" />
+            </svg>
             Logout
           </button>
         </li>

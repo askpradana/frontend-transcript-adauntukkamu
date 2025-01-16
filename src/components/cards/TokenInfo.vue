@@ -43,7 +43,7 @@ const move = () => {
     <h1 class="text-3xl font-bold mb-6">Hello 👋 {{ name }}</h1>
     <div class="flex gap-4 items-center">
       <span class="flex justify-center items-center gap-4">
-        <p class="font-semibold" v-if="tokenLeft">
+        <p class="font-semibold" v-if="tokenLeft || tokenLeft == 0">
           Token left : {{ tokenLeft }}
         </p>
         <p v-else>Loading...</p>
