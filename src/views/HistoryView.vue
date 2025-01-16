@@ -21,39 +21,47 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="ml-16 min-h-screen">
-    <div class="mx-2 md:max-w-2xl md:mx-auto">
-      <SearchInput v-model="historyStore.searchQuery" />
+  <div class="ml-0 sm:ml-16 min-h-screen px-4 sm:px-0">
+    <div class="w-full max-w-2xl mx-auto">
+      <!-- Search Input -->
+      <SearchInput v-model="historyStore.searchQuery" class="mt-4 sm:mt-6" />
+
+      <!-- Loading State -->
       <div
         v-if="historyStore.isLoading"
-        class="text-center flex justify-center items-center min-h-[80vh]"
+        class="flex justify-center items-center min-h-[60vh] sm:min-h-[80vh]"
       >
         <div
-          class="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-900 mx-auto"
+          class="animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-b-2 border-gray-900"
         ></div>
       </div>
 
+      <!-- Error State -->
       <div
         v-else-if="historyStore.error"
-        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"
+        class="mt-4 sm:mt-6 bg-red-100 border border-red-400 text-red-700 px-3 py-2 sm:px-4 sm:py-3 rounded text-sm sm:text-base"
       >
         {{ historyStore.error }}
       </div>
-      <span v-else>
-        <p class="my-6 text-sm">
+
+      <!-- Content -->
+      <div v-else>
+        <p class="my-4 sm:my-6 text-sm sm:text-base text-gray-600">
           You have {{ historyStore.historyItems.length }} previous
           transcriptions
         </p>
+
         <div class="list-container">
-          <div class="my-4 grid gap-2">
+          <div class="grid gap-2 sm:gap-3 pb-6">
             <HistoryCard
               v-for="item in historyStore.filteredHistoryItems"
               :key="item.id"
               :items="item"
+              class="w-full"
             />
           </div>
         </div>
-      </span>
+      </div>
     </div>
   </div>
 </template>

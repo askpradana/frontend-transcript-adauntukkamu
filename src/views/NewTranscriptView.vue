@@ -32,18 +32,21 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="ml-16">
-    <div class="mx-2 md:max-w-2xl md:mx-auto">
-      <h1 class="text-xl text-center font-bold text-gray-800 my-8 md:text-3xl">
+  <div class="ml-0 sm:ml-16 min-h-screen px-4 sm:px-0">
+    <div class="w-full max-w-2xl mx-auto">
+      <h1
+        class="text-xl sm:text-3xl text-center font-bold text-gray-800 my-4 sm:my-8"
+      >
         Upload Audio for Transcription
       </h1>
-      <form @submit.prevent="handleSubmit" class="space-y-6">
+
+      <form @submit.prevent="handleSubmit" class="space-y-4 sm:space-y-6">
         <UploadAudioFile v-model="audioFile" />
 
         <button
           type="submit"
           :disabled="isLoading"
-          class="w-full p-3 border border-black rounded-md shadow-sm text-sm font-semibold text-dark transition duration-300 ease-in-out bg-white hover:bg-secondary_darker hover:border-dark/15 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:opacity-50 disabled:cursor-not-allowed"
+          class="w-full p-3 border border-black rounded-md shadow-sm text-sm font-semibold text-dark transition duration-300 ease-in-out bg-white hover:bg-secondary_darker hover:border-dark/15 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:opacity-50 disabled:cursor-not-allowed active:transform active:scale-[0.98]"
         >
           {{ isLoading ? 'Transcribing...' : 'Transcribe Audio' }}
         </button>
@@ -51,14 +54,16 @@ const handleSubmit = async () => {
 
       <div
         v-if="transcriptionStore.error"
-        class="mt-6 p-4 bg-red-50 rounded-lg border border-warning"
+        class="mt-4 sm:mt-6 p-3 sm:p-4 bg-red-50 rounded-lg border border-warning"
       >
-        <p class="text-sm text-red-700">{{ transcriptionStore.error }}</p>
+        <p class="text-sm sm:text-base text-red-700">
+          {{ transcriptionStore.error }}
+        </p>
       </div>
 
-      <span v-if="transcriptionStore.transcription">
+      <div v-if="transcriptionStore.transcription" class="mt-4 sm:mt-6">
         <ResultColumn v-model="transcriptionStore.transcription" />
-      </span>
+      </div>
     </div>
   </div>
 </template>

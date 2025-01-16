@@ -39,11 +39,11 @@ const move = () => {
 </script>
 
 <template>
-  <div class="bg-white p-6 rounded-lg shadow">
+  <div class="bg-white p-6 rounded-lg shadow border border-black">
     <h1 class="text-3xl font-bold mb-6">Hello 👋 {{ name }}</h1>
     <div class="flex gap-4 items-center">
       <span class="flex justify-center items-center gap-4">
-        <p class="font-semibold" v-if="tokenLeft">
+        <p class="font-semibold" v-if="tokenLeft || tokenLeft == 0">
           Token left : {{ tokenLeft }}
         </p>
         <p v-else>Loading...</p>

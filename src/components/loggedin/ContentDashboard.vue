@@ -95,7 +95,7 @@ const processCustomTopUp = () => {
 </script>
 
 <template>
-  <main class="p-6 max-w-screen-xl -mt-4 md:ml-48 lg:ml-52 lg:mt-0">
+  <main class="p-6 max-w-screen-xl -mt-4 md:ml-48 lg:ml-60 lg:mt-0">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <TokenInfo
         :name="pbStore?.currentUser?.name"
@@ -103,7 +103,7 @@ const processCustomTopUp = () => {
         :is-loading="isLoading"
         :refresh-token-func="checkTokenLeftWithDelay"
       />
-      <div class="bg-white p-6 rounded-lg shadow">
+      <div class="bg-white p-6 rounded-lg shadow border border-black">
         <div class="flex justify-between items-center mb-6">
           <h2 class="text-xl font-semibold">Top up Tokens</h2>
         </div>
